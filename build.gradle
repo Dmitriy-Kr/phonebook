@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'com.home'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    archiveName("phonebook.jar")
+    manifest{
+        attributes("Main-class" : "phonebook.Main")
+    }
+}
