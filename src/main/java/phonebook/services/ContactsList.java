@@ -1,8 +1,20 @@
 package phonebook.services;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.NoSuchElementException;
 
+@JsonAutoDetect
+@JacksonXmlRootElement(localName = "contacts")
 public class ContactsList {
+
+
+    @JsonProperty("contacts")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "contact")
     Contact[] contacts;
 
     public Contact get(int index) {

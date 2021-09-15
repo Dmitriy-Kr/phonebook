@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<contacts>
+  <contact>
+    <name>Марина</name>
+    <phoneNumber>+380502356589</phoneNumber>
+  </contact>
+  <contact>
+    <name>Кристина</name>
+    <phoneNumber>+380965487876</phoneNumber>
+  </contact>
+  <contact>
+    <name>Владимир</name>
+    <phoneNumber>+380452364578</phoneNumber>
+  </contact>
+  <contact>
+    <name>Александр</name>
+    <phoneNumber>+380457894513</phoneNumber>
+  </contact>
+  <contact>
+    <name>Олег</name>
+    <phoneNumber>+38457894512</phoneNumber>
+  </contact>
+</contacts>

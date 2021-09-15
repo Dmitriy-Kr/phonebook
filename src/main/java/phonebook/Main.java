@@ -10,8 +10,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ContactsView contactsView = new ContactsView();
 //        ContactsService phoneBook = new InMemoryContactsService();
-        ContactsService phoneBook = new FileContactsServiceCSV();
+//        ContactsService phoneBook = new FileContactsServiceCSV();
 //        ContactsService phoneBook = new FileContactsServiceObj();
+        ContactsService phoneBook = new FileContactsServiceXML();
+//        ContactsService phoneBook = new FileContactsServiceJSON();
         Menu menu = new Menu(scanner);
 
 //        phoneBook.add(new Contact("Иван", "+380975882032"));
