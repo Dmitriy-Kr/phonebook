@@ -1,4 +1,4 @@
-package phonebook.menu;
+package phonebook.ui.menu;
 
 import java.util.Scanner;
 
@@ -41,8 +41,8 @@ public class Menu {
     }
 
     public void run() {
-        System.out.println("Приветствую Вас." + System.lineSeparator());
         while (true) {
+            System.out.println("Пункты меню:");
             printMenu();
             System.out.print("Сделайте свой выбор: ");
             int choice = getChoice();
@@ -52,7 +52,6 @@ public class Menu {
             }
             actions[choice].doAction();
             if(actions[choice].closeAfter()) {
-                System.out.println("До скорых встреч!!!");
                 break;
             }
         }

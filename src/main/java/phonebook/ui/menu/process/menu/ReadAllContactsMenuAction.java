@@ -1,8 +1,9 @@
-package phonebook.menu;
+package phonebook.ui.menu.process.menu;
 
 
 import phonebook.services.ContactsService;
-import phonebook.ui.ContactsView;
+import phonebook.ui.menu.MenuAction;
+import phonebook.ui.views.ContactsView;
 
 public class ReadAllContactsMenuAction implements MenuAction {
     private ContactsService phoneBook;
@@ -16,7 +17,11 @@ public class ReadAllContactsMenuAction implements MenuAction {
     @Override
     public void doAction() {
         System.out.println("--------------------------------------------------");
-        contactsView.showAllContacts(phoneBook.getAll());
+        try {
+            contactsView.showAllContacts(phoneBook.getAll());
+        } catch ( RuntimeException e){
+            System.out.println(e.getMessage());
+        }
         System.out.println("--------------------------------------------------");
     }
 

@@ -1,4 +1,6 @@
-package phonebook.menu;
+package phonebook.ui.menu.process.menu;
+
+import phonebook.ui.menu.MenuAction;
 
 public class ExitMenuAction implements MenuAction {
     @Override

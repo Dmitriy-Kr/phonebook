@@ -1,4 +1,4 @@
-package phonebook.menu;
+package phonebook.ui.menu;
 
 public interface MenuAction {
     void doAction();

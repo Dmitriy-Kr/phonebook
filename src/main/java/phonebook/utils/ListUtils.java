@@ -1,7 +1,8 @@
 package phonebook.utils;
 
 
-import phonebook.services.Contact;
+import phonebook.pojo.entity.Contact;
+import phonebook.pojo.entity.ContactType;
 import phonebook.services.ContactsList;
 
 import java.util.Locale;
@@ -11,11 +12,11 @@ public class ListUtils {
     public static void main(String[] args) {
         ContactsList phoneBook = new ContactsList();
 
-        phoneBook.add(new Contact("Иван", "+380975882032"));
-        phoneBook.add(new Contact("Артём", "+380965882032"));
-        phoneBook.add(new Contact("Игорь", "+380955582032"));
-        phoneBook.add(new Contact("Максим", "+380955882932"));
-        phoneBook.add(new Contact("Денис", "+380958112932"));
+        phoneBook.add(new Contact("1",  "Иван", ContactType.PHONE,"+380975882032"));
+        phoneBook.add(new Contact("2", "Артём", ContactType.PHONE, "+380965882032"));
+        phoneBook.add(new Contact("3", "Игорь", ContactType.PHONE, "+380955582032"));
+        phoneBook.add(new Contact("4", "Максим", ContactType.PHONE, "+380955882932"));
+        phoneBook.add(new Contact("5", "Денис", ContactType.PHONE, "+380958112932"));
 
         System.out.println("------------------------reduce----------------------------");
 
@@ -35,8 +36,8 @@ public class ListUtils {
 
         System.out.println("------------------------map---------------------------------");
 
-        forEach(map(phoneBook, x->new Contact(x.getName().toUpperCase(Locale.ROOT), "__________")),
-                x-> System.out.println(x.getName() + " " + x.getNumber()));
+        forEach(map(phoneBook, x->new Contact(x.getId(), x.getName().toUpperCase(Locale.ROOT), x.getContactType(), "__________")),
+                x-> System.out.println(x.getId() + " " + x.getName() + " " + x.getContactType() + " " + x.getValue()));
     }
 
     public static ContactsList filter(ContactsList list, Predicate<Contact> predicate) {

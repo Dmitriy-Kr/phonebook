@@ -1,23 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <contacts>
   <contact>
+    <id>1</id>
     <name>Марина</name>
-    <phoneNumber>+380502356589</phoneNumber>
+    <type>phone</type>
+    <value>+380654567823</value>
   </contact>
   <contact>
-    <name>Кристина</name>
-    <phoneNumber>+380965487876</phoneNumber>
-  </contact>
-  <contact>
-    <name>Владимир</name>
-    <phoneNumber>+380452364578</phoneNumber>
-  </contact>
-  <contact>
-    <name>Александр</name>
-    <phoneNumber>+380457894513</phoneNumber>
-  </contact>
-  <contact>
-    <name>Олег</name>
-    <phoneNumber>+38457894512</phoneNumber>
+    <id>2</id>
+    <name>Максим</name>
+    <type>email</type>
+    <value>hgfd@mail.gf</value>
   </contact>
 </contacts>

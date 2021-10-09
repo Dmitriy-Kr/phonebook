@@ -1,8 +1,7 @@
 package phonebook.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import phonebook.pojo.entity.Contact;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -11,42 +10,46 @@ import java.util.Locale;
 public class FileContactsServiceJSON implements ContactsService {
     private ContactsList contactsList;
 
-    public FileContactsServiceJSON() {
-        contactsList = readFile();
-
-    }
-
     @Override
     public ContactsList getAll() {
-        return contactsList;
+        return readFile();
     }
 
     @Override
     public void remove(int index) {
+        contactsList = readFile();
         contactsList.remove(index);
         writeFile(contactsList);
     }
 
     @Override
     public void add(Contact c) {
+        contactsList = readFile();
+        c.setId(String.valueOf(getNextId(contactsList)));
         contactsList.add(c);
         writeFile(contactsList);
     }
 
     @Override
     public Contact get(int index) {
-        return contactsList.get(index);
+        return readFile().get(index);
     }
 
     @Override
     public int size() {
-        return contactsList.size();
+        return readFile().size();
     }
 
     @Override
     public ContactsList findByName(String nameLetters) {
-        return phonebook.utils.ListUtils.filter(contactsList, x -> x.getName().toLowerCase(Locale.ROOT)
+        return phonebook.utils.ListUtils.filter(readFile(), x -> x.getName().toLowerCase(Locale.ROOT)
                 .startsWith(nameLetters.toLowerCase(Locale.ROOT)));
+    }
+
+    @Override
+    public ContactsList findByValue(String valueStart) {
+        return phonebook.utils.ListUtils.filter(readFile(), x -> x.getValue().toLowerCase(Locale.ROOT)
+                .startsWith(valueStart.toLowerCase(Locale.ROOT)));
     }
 
     private ContactsList readFile() {
@@ -73,5 +76,18 @@ public class FileContactsServiceJSON implements ContactsService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private int getNextId(ContactsList contactsList) {
+        contactsList = readFile();
+        int nextId = 0;
+        for (int i = 0; i < contactsList.size(); i++) {
+            int id;
+            if ((id = Integer.parseInt(contactsList.get(i).getId())) > nextId) {
+                nextId = id;
+            }
+
+        }
+        return ++nextId;
     }
 }

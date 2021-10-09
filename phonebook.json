@@ -1,15 +1,13 @@
 {
   "contacts" : [ {
-    "name" : "Кристина",
-    "phone-Number" : "+380502352356"
+    "id" : "1",
+    "name" : "Анастасия",
+    "type" : "phone",
+    "value" : "+3805023256589"
   }, {
-    "name" : "Олег",
-    "phone-Number" : "+380504568978"
-  }, {
-    "name" : "Татьяна",
-    "phone-Number" : "+37894561245"
-  }, {
-    "name" : "Валерий",
-    "phone-Number" : "+380547891235"
+    "id" : "2",
+    "name" : "Егор",
+    "type" : "email",
+    "value" : "egor@hj.yu"
   } ]
 }

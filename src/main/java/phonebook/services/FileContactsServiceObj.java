@@ -1,46 +1,53 @@
 package phonebook.services;
 
+import phonebook.pojo.entity.Contact;
+
 import java.io.*;
 import java.util.Locale;
 
 public class FileContactsServiceObj implements ContactsService {
     private ContactsList contactsList;
 
-    public FileContactsServiceObj() {
-        contactsList = readFile();
-    }
-
     @Override
     public ContactsList getAll() {
-        return contactsList;
+        return readFile();
     }
 
     @Override
     public void remove(int index) {
+        contactsList = readFile();
         contactsList.remove(index);
         writeFile(contactsList);
     }
 
     @Override
     public void add(Contact c) {
+        contactsList = readFile();
+        c.setId(String.valueOf(getNextId(contactsList)));
         contactsList.add(c);
         writeFile(contactsList);
     }
 
     @Override
     public Contact get(int index) {
-        return contactsList.get(index);
+        return readFile().get(index);
     }
 
     @Override
     public int size() {
-        return contactsList.size();
+        return readFile().size();
     }
 
     @Override
     public ContactsList findByName(String nameLetters) {
-        return phonebook.utils.ListUtils.filter(contactsList, x -> x.getName().toLowerCase(Locale.ROOT)
+        return phonebook.utils.ListUtils.filter(readFile(), x -> x.getName().toLowerCase(Locale.ROOT)
                 .startsWith(nameLetters.toLowerCase(Locale.ROOT)));
+    }
+
+    @Override
+    public ContactsList findByValue(String valueStart) {
+        return phonebook.utils.ListUtils.filter(readFile(), x -> x.getValue().toLowerCase(Locale.ROOT)
+                .startsWith(valueStart.toLowerCase(Locale.ROOT)));
     }
 
     private ContactsList readFile() {
@@ -66,7 +73,7 @@ public class FileContactsServiceObj implements ContactsService {
 
     public void writeFile(ContactsList contactsList) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("phonebook.obj"))) {
-            for (int i = 0; i < size(); i++) {
+            for (int i = 0; i < contactsList.size(); i++) {
                 oos.writeObject(contactsList.get(i));
             }
             oos.writeObject(null);
@@ -74,5 +81,18 @@ public class FileContactsServiceObj implements ContactsService {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private int getNextId(ContactsList contactsList) {
+        contactsList = readFile();
+        int nextId = 0;
+        for (int i = 0; i < contactsList.size(); i++) {
+            int id;
+            if ((id = Integer.parseInt(contactsList.get(i).getId())) > nextId) {
+                nextId = id;
+            }
+
+        }
+        return ++nextId;
     }
 }

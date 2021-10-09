@@ -1,7 +1,8 @@
-package phonebook.menu;
+package phonebook.ui.menu.process.menu;
 
 
 import phonebook.services.ContactsService;
+import phonebook.ui.menu.MenuAction;
 
 import java.util.Scanner;
 
@@ -16,14 +17,18 @@ public class RemoveContactMenuAction implements MenuAction {
 
     @Override
     public void doAction() {
-        System.out.print("Введите номер позиции контакта: ");
-        if(!scanner.hasNextInt()) {
+        System.out.print("Введите id контакта: ");
+        if (!scanner.hasNextInt()) {
             System.out.println("Введённое значение не является числом");
             return;
         }
         int choice = scanner.nextInt();
         scanner.nextLine();
-        phoneBook.remove(choice - 1);
+        try {
+            phoneBook.remove(choice - 1);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
